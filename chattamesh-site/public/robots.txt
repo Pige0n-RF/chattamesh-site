@@ -1,0 +1,11 @@
+# chattame.sh -- ChattaMesh community mesh radio network
+# Everything here is public reference material. Crawl it.
+
+User-agent: *
+Allow: /
+
+# The merged pages replaced these in v1.1; they carry a noindex as well.
+Disallow: /settings-explained-uc
+Disallow: /information-v1
+
+Sitemap: https://chattame.sh/sitemap.xml
