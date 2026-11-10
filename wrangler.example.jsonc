@@ -1,0 +1,29 @@
+{
+  // ChattaMesh Rev 2.1 — Cloudflare Workers static assets.
+  //
+  // This is a TEMPLATE. If you already have a wrangler.jsonc in your project,
+  // keep yours — it has the account and worker name this one cannot know.
+  // Copy it to wrangler.jsonc and fill in the two placeholders below.
+  //
+  //   npx wrangler deploy
+  //
+  // The site is pure static assets: no Worker script, no Durable Object, no
+  // bindings. Everything under public/ is served as-is.
+
+  "name": "chattamesh",
+  "compatibility_date": "2026-09-27",
+
+  "assets": {
+    "directory": "./public",
+
+    // Serves /getting-started for public/getting-started.html and 301s the
+    // .html form. Every canonical URL the site emits is extensionless, so
+    // changing this means changing the canonicals in seo.py to match.
+    "html_handling": "auto-trailing-slash",
+
+    // 404.html is not present; unknown paths fall through to Cloudflare's
+    // default. Add one to public/ and switch this to "404-page" if you want a
+    // branded miss.
+    "not_found_handling": "none"
+  }
+}

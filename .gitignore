@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# Regenerated from public/ by make_variant.py on every build.
+public-soon/
+public-soon.building/

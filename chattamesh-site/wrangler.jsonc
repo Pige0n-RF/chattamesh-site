@@ -1,9 +1,0 @@
-{
-  // CHANGE THIS to your Worker's exact name from the Cloudflare dashboard
-  "name": "YOUR-EXACT-WORKER-NAME",
-  "compatibility_date": "2026-10-31",
-  "assets": { "directory": "./public" },
-  "routes": [
-    { "pattern": "chattame.sh", "custom_domain": true }
-  ]
-}
