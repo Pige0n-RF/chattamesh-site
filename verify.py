@@ -437,6 +437,9 @@ def main():
         for name in ("videos-meetings.html", "announcements.html"):
             asked.clear()
             sp.goto(f"http://127.0.0.1:{PORT}/{name}", wait_until="networkidle")
+            for n in range(sp.locator("[data-yt]").count()):
+                sp.locator("[data-yt]").nth(n).scroll_into_view_if_needed()
+                sp.wait_for_timeout(250)
             sp.wait_for_timeout(700)
             ids = sp.eval_on_selector_all(
                 "[data-yt]", "els => els.map(e => e.getAttribute('data-yt'))")

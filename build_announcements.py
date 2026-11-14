@@ -587,9 +587,11 @@ MAIN = f"""<main>
           <div><span class="k">Course closes</span><span class="v">2:00 PM</span></div>
         </div>
         <p>Roads into Barnhardt Circle close at <strong>5:30 AM</strong> and
-          barricades go up from 4:30 to force traffic into the parking area, so
-          get in early and check your arrival with Net Control. Packet pick-up
-          runs 6:00&ndash;7:00. Every station sends a test message at 7:00.</p>
+          barricades go up from 4:30. <strong>You need an official race vehicle
+          pass to get through &mdash; contact Xach (KR4OWY, Pige0n) for
+          one</strong>, and sort it before you set off rather than at the
+          barricade. Packet pick-up runs 6:00&ndash;7:00. Every station sends a
+          test message at 7:00.</p>
 
         <p class="fc-head">What you&rsquo;ll be doing</p>
         <ul>
