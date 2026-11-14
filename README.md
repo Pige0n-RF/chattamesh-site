@@ -1,4 +1,4 @@
-# ChattaMesh — Rev 2.8
+# ChattaMesh — Rev 2.9
 
 Static site for chattame.sh. Ten pages, no framework, no build step at serve
 time. Everything under `public/` is what deploys.

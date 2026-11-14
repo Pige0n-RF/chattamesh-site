@@ -331,8 +331,27 @@ CSS = """
      actually need in text and the picture links out to the full-size file.
      Classes are qualified (.race p.x) because `.race p` above is (0,1,1). */
   .race-chart{display:block; width:100%; height:auto; border-radius:var(--radius);
-              border:1px solid var(--line-soft); margin:0 0 9px;}
-  .race p.chart-note{font-size:0.8rem; color:var(--muted-2); margin:0 0 20px; text-align:center;}
+              border:1px solid var(--line-soft); background:#fff; margin:0 0 7px;}
+  .race p.chart-note{font-size:0.8rem; color:var(--muted-2); margin:0 0 18px; text-align:center;}
+  .race-maps{display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); margin-bottom:6px;}
+  .race-alert{
+    border:1px solid var(--rose-dim); background:rgba(242,200,97,0.1);
+    border-radius:var(--radius); padding:15px 18px; margin:0 0 20px;
+  }
+  .race p.alert-head{
+    font-family:'JetBrains Mono', monospace; font-size:0.7rem;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--rose);
+    margin:0 0 9px;
+  }
+  .as-table{width:100%; border-collapse:collapse; margin:0 0 11px; font-size:0.9rem;}
+  .as-table th{
+    font-family:'JetBrains Mono', monospace; font-size:0.66rem;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--muted-2);
+    text-align:left; font-weight:400; padding:0 10px 7px 0; border-bottom:1px solid var(--line-soft);
+  }
+  .as-table td{padding:8px 10px 8px 0; color:var(--muted); border-bottom:1px solid var(--line-soft);}
+  .as-table td.n{color:var(--rose); font-weight:700; font-family:'JetBrains Mono', monospace; white-space:nowrap;}
+  .as-table td.mi{font-family:'JetBrains Mono', monospace; font-size:0.8rem; color:var(--muted-2); white-space:nowrap;}
   .race a{color:var(--signal);}
   .race p.fc-head{
     font-family:'JetBrains Mono', monospace; font-size:0.72rem;
@@ -507,35 +526,70 @@ MAIN = f"""<main>
 
     <div class="meet">
       <div class="meet-bar">
-        <span class="meet-pin">This Saturday</span>
-        <h2>Battlefield Races &mdash; mesh operators needed</h2>
+        <span class="meet-pin">Today</span>
+        <h2>Battlefield Races &mdash; operator brief</h2>
       </div>
       <div class="meet-body race">
-        <a href="images/announcements/battlefield-ops-full.webp" target="_blank"
-           rel="noopener"><img class="race-chart"
-           src="images/announcements/battlefield-ops.webp"
-           width="1400" height="1529" decoding="async"
-           alt="Operator positions for the Chickamauga Battlefield Marathon and
-                Half: a course map with Net Control at the start/finish and six
-                aid stations around the loop, plus the race-day timeline,
-                operator duties, kit list and message format."></a>
-        <p class="chart-note">Tap the chart for the full-size version.</p>
+        <div class="race-alert">
+          <p class="alert-head">Aid station numbers &mdash; read this first</p>
+          <p>Use the <strong>official numbers below</strong>, from the race
+            packet. An earlier ChattaMesh chart numbered the stations
+            differently and only AS1 matched. Net Control, the medics and race
+            officials all work from the official numbering, so a message
+            prefixed with the wrong number sends help to the wrong place.</p>
+        </div>
+
+        <table class="as-table">
+          <tr><th>Station</th><th>Where</th><th>Mile</th></tr>
+          <tr><td class="n">1</td><td>Lafayette Rd at the Lap 2 start</td><td class="mi">2 &middot; 11 &middot; 24</td></tr>
+          <tr><td class="n">2</td><td>Brotherton Rd junction</td><td class="mi">4 &middot; 15</td></tr>
+          <tr><td class="n">3</td><td>South loop, Lafayette Rd</td><td class="mi">9 &middot; 21</td></tr>
+          <tr><td class="n">4</td><td>Near Wilder Tower</td><td class="mi">23</td></tr>
+          <tr><td class="n">5</td><td>The 13.1 spur off Lafayette Rd</td><td class="mi">13 &middot; 14</td></tr>
+          <tr><td class="n">6</td><td>Jays Mill Rd</td><td class="mi">17 &middot; 18</td></tr>
+        </table>
+        <p>The map marks a point on Jays Mill Rd near mile 19 as
+          <strong>&ldquo;Not an Aid Station&rdquo;</strong> &mdash; it looks
+          like one and isn&rsquo;t. The half marathon runs the inner loop only,
+          so it does not pass stations 5 or 6.</p>
+
+        <div class="race-maps">
+          <div>
+            <a href="images/announcements/course-marathon-full.webp" target="_blank" rel="noopener">
+              <img class="race-chart" src="images/announcements/course-marathon.webp"
+                   width="1200" height="1553" decoding="async"
+                   alt="Official marathon course map: two laps from the Barnhardt Circle
+                        start/finish, with the six numbered aid stations, mile markers and
+                        portalets marked."></a>
+            <p class="chart-note">Marathon &mdash; tap for full size</p>
+          </div>
+          <div>
+            <a href="images/announcements/course-half-full.webp" target="_blank" rel="noopener">
+              <img class="race-chart" src="images/announcements/course-half.webp"
+                   width="1200" height="1553" decoding="async"
+                   alt="Official half marathon course map: one lap of the inner loop with
+                        four aid stations and mile markers."></a>
+            <p class="chart-note">Half marathon &mdash; tap for full size</p>
+          </div>
+        </div>
 
         <p>ChattaMesh is running MeshCore alongside <strong>Catoosa/Walker
-          ARES</strong> for the Chickamauga Battlefield Marathon &amp; Half.
-          Every post is a mesh operator paired with a ham &mdash;
+          ARES</strong>. Every post is a mesh operator paired with a ham &mdash;
           <strong>no ham licence is needed to run mesh</strong>.</p>
 
+        <p class="fc-head">Race day times</p>
         <div class="race-when">
-          <div><span class="k">When</span><span class="v">Sat 14 Nov, 6:00 AM &ndash; ~2:00 PM</span></div>
-          <div><span class="k">Check-in</span><span class="v">Old Post Bandstand, 6 Barnhardt Circle</span></div>
-          <div><span class="k">Where</span><span class="v">Fort Oglethorpe, GA</span></div>
-          <div><span class="k">Operators needed</span><span class="v">10</span></div>
+          <div><span class="k">Roads close</span><span class="v">5:30 AM &ndash; 2:00 PM</span></div>
+          <div><span class="k">Marathon &amp; half</span><span class="v">7:30 AM</span></div>
+          <div><span class="k">Wheelchair half</span><span class="v">7:27 AM</span></div>
+          <div><span class="k">5K</span><span class="v">8:00 AM</span></div>
+          <div><span class="k">Jr Marathon</span><span class="v">10:00 AM</span></div>
+          <div><span class="k">Course closes</span><span class="v">2:00 PM</span></div>
         </div>
-        <p>Barnhardt Circle lot closes at 6:45, so arrive before then &mdash;
-          and don&rsquo;t park on the circle itself. Every station sends a test
-          message at 7:00; the marathon and half start at 7:30, wheelchair
-          start 7:25.</p>
+        <p>Roads into Barnhardt Circle close at <strong>5:30 AM</strong> and
+          barricades go up from 4:30 to force traffic into the parking area, so
+          get in early and check your arrival with Net Control. Packet pick-up
+          runs 6:00&ndash;7:00. Every station sends a test message at 7:00.</p>
 
         <p class="fc-head">What you&rsquo;ll be doing</p>
         <ul>
@@ -547,15 +601,16 @@ MAIN = f"""<main>
         </ul>
         <p>Messages go out as <strong>station &middot; category &middot; bib
           number &middot; what&rsquo;s happening</strong> &mdash; for example
-          <strong>AS3 MED Bib 1234 ankle injury, needs transport</strong>.
-          Bib numbers only, never runner names. Life-safety calls still go by
-          voice and 911 first; the mesh is the backup and the written record.</p>
+          <strong>AS2 MED Bib 1234 ankle injury, needs transport</strong>.
+          Categories are MED, SUPPLY, STATUS and SWEEP. Bib numbers only, never
+          runner names. Life-safety calls still go by voice and 911 first; the
+          mesh is the backup and the written record.</p>
 
         <p class="fc-head">What to bring</p>
         <ul>
           <li>A charged MeshCore companion with its antenna, and your phone with
             the MeshCore app</li>
-          <li>Power bank and cables &mdash; it&rsquo;s a 7&ndash;8 hour day</li>
+          <li>Power bank and cables &mdash; the course is supported until 2:00 PM</li>
           <li>Folding chair, water, snacks, notepad and pen</li>
           <li>Layers and rain gear; it&rsquo;s in the low 40s at the start</li>
         </ul>
@@ -563,15 +618,15 @@ MAIN = f"""<main>
           there&rsquo;s nothing to set up beforehand.</p>
 
         <div class="panel">
-          <p class="panel-head">Signing up</p>
-          <p>Put your name down on the <a href="{DISCORD}" target="_blank"
-            rel="noopener">ChattaMesh Discord</a>, where event updates go out
-            too. Questions to Xach (KR4OWY) for ChattaMesh, or Max (N4NWD),
-            Emergency Coordinator for Catoosa/Walker ARES.</p>
+          <p class="panel-head">On the day</p>
+          <p>Updates go out on the <a href="{DISCORD}" target="_blank"
+            rel="noopener">ChattaMesh Discord</a>. Questions to Xach (KR4OWY)
+            for ChattaMesh, or Max (N4NWD), Emergency Coordinator for
+            Catoosa/Walker ARES. Times and aid station numbers on this page come
+            from the official 2026 race packet.</p>
         </div>
       </div>
     </div>
-
     <div class="meet">
       <div class="meet-bar">
         <span class="meet-pin">Draft &mdash; feedback wanted</span>

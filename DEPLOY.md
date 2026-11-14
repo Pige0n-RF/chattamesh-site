@@ -877,6 +877,40 @@ because Xach put them there, but a plain-text mailto on a public page is
 scraped within days, so the card routes people to Discord and names the two
 contacts by callsign instead.
 
+## Rev 2.9 -- official race packet, aid stations renumbered
+
+Xach sent the official 2026 packet at 3:20am on race morning. It disagrees
+with the ChattaMesh ops graphic Rev 2.8 was built from, on the one detail that
+matters most.
+
+**Five of the six aid station numbers were wrong.** The packet's map numbers
+them 1-6; the ops chart used a different order and only AS1 agreed:
+
+    official 1 = chart AS1   (Lafayette Rd, Lap 2 start, mi 2/11/24)
+    official 2 = chart AS3   (Brotherton Rd junction, mi 4/15)
+    official 3 = chart AS5   (south loop, mi 9/21)
+    official 4 = chart AS6   (Wilder Tower, mi 23)
+    official 5 = chart AS2   (13.1 spur, mi 13/14)
+    official 6 = chart AS4   (Jays Mill Rd, mi 17/18)
+
+Every mesh message is prefixed with a station number, and Net Control, the
+medics and race officials all work from the packet's numbering, so a MED
+message from the wrong number routes help to the wrong point on a 26-mile
+course. The card now leads with the conflict and the official table, and the
+old ops graphic was deleted rather than kept alongside -- two numbering schemes
+on one page is the failure mode, not the fix.
+
+Other corrections from the packet: wheelchair half starts 7:27 (not 7:25);
+roads into Barnhardt Circle close 5:30am (the chart said the lot closed at
+6:45, which would have had operators setting off after the closure); 5K at
+8:00, Jr Marathon at 10:00, course closes 2:00pm. The packet also marks a point
+on Jays Mill Rd near mile 19 "Not an Aid Station" -- called out in the copy,
+since it looks like one.
+
+Both official course maps are published, marathon and half, each at a display
+size and a full-size link. The half runs the inner loop only and does not reach
+stations 5 or 6.
+
 ### Open
 
 Nothing outstanding on content. The remaining items are in README.md: the
