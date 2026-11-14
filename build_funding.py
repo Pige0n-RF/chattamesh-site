@@ -54,9 +54,10 @@ LEDGER = [
     ("Current resource pool",
      '<p class="ledger-figure">$0</p>'),
     ("How to contribute",
-     '<p>Nothing to contribute to yet &mdash; the pool opens once the '
-     'committee is seated. When it does, there will be a direct link on '
-     'this page and a QR code at meetings and presentations.</p>'),
+     f'<p>Through the <a href="{committee.PAYPAL_URL}" target="_blank" '
+     f'rel="noopener">ChattaMesh PayPal Pool</a>, or by scanning the QR '
+     f'code above &mdash; the same code is on hand at meetings and '
+     f'presentations.</p>'),
 ]
 
 CSS = """
@@ -179,32 +180,37 @@ MAIN = f"""<main>
     <div class="fund-head">
       <h1>Funding</h1>
       <span class="status">{STATUS}</span>
-      <p>We have opted for a <strong>PayPal Pool</strong>, with a Resource
-        Committee voting on how it gets spent. That decision is a first draft
-        and open to feedback &mdash; the other options the group weighed are
-        below, along with the public ledger.</p>
+      <p>ChattaMesh is funded by a <strong>PayPal Pool</strong>, with a
+        committee of Fund Stewards voting on how it gets spent. The other
+        options the group weighed are below, along with the public ledger.</p>
     </div>
 
     <div class="fc-block">
-      <h2>Funding &amp; Resource Committee</h2>
-      <p>The committee exists to vote, without bias, on how our donated and
-        shared resources get spent. The focus is <strong>repeater parts</strong>
+      <h2>Mesh Fund Committee</h2>
+
+      <div class="pool">
+        <img src="{committee.PAYPAL_QR}" width="564" height="564"
+             alt="QR code linking to the ChattaMesh PayPal Pool."
+             loading="lazy" decoding="async">
+        <div class="pool-body">
+          <p>Donations go to the ChattaMesh PayPal Pool, held by
+            <strong>{committee.HOLDER}</strong>. Scan the code or use the link.</p>
+          <a class="btn-pool" href="{committee.PAYPAL_URL}" target="_blank"
+             rel="noopener">Contribute to the pool</a>
+        </div>
+      </div>
+
+      <p class="fc-head">Your Fund Stewards</p>
+      <p>The stewards vote, without bias, on how our donated and shared
+        resources get spent. The focus is <strong>repeater parts</strong>
         &mdash; expanding and strengthening the mesh.</p>
-
-      <p class="fc-head">The pool</p>
-      <p>Donations will be collected through a PayPal Pool, created and held by
-        <strong>{committee.HOLDER}</strong>. Committee members will have access
-        to the account.</p>
-
-      <p class="fc-head">Current nominees</p>
       <ul class="fc-seats">
 {seats}
       </ul>
-      <p>Interested in joining? Nominate yourself in <code>#funding</code> on
-        <a href="{DISCORD}" target="_blank" rel="noopener">our Discord</a>. If
-        you have a concern about a specific committee member, raise it publicly
-        in the same channel &mdash; and tell us what you think of this draft
-        while you are there.</p>
+      <p>If you have a concern about a specific steward, raise it publicly in
+        <code>#funding</code> on <a href="{DISCORD}" target="_blank"
+        rel="noopener">our Discord</a>, or bring it to the monthly meeting
+        &mdash; 3rd Wednesday, 7:00 PM.</p>
     </div>
 
     <p class="fund-sub">Options on the table</p>

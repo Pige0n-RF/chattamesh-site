@@ -1,4 +1,4 @@
-# ChattaMesh — Rev 2.9
+# ChattaMesh — Rev 3.0
 
 Static site for chattame.sh. Ten pages, no framework, no build step at serve
 time. Everything under `public/` is what deploys.
@@ -42,7 +42,8 @@ it.** Four pages are built from data:
 | `videos-*.html` | `build_videos.py` | `VIDEOS` and `PAGES` dicts |
 | `announcements.html` | `build_announcements.py` | `MEETING`, `ITEMS`, `ARCHIVED` |
 | `funding.html` | `build_funding.py` | `OPTIONS`, `ALLOCATIONS`, `LEDGER` |
-| committee names | `committee.py` | `SEATS`, `HOLDER`, `PAYPAL_URL` |
+| committee + pool | `committee.py` | `SEATS`, `HOLDER`, `PAYPAL_URL` |
+| `images/funding-qr.png` | `tools/make-qr.py` | re-run if `PAYPAL_URL` changes |
 | every head | `seo.py` | the `PAGES` table |
 
 The others (`index`, `getting-started`, `setup-information`, `about`) are edited

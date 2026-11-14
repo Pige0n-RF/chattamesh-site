@@ -911,6 +911,34 @@ Both official course maps are published, marathon and half, each at a display
 size and a full-size link. The half runs the inner loop only and does not reach
 stations 5 or 6.
 
+## Rev 3.0 -- the fund is real
+
+The committee is seated, the pool is open, and the draft framing is gone from
+both pages. Five Fund Stewards, named as they are in Discord.
+
+**Handles are published verbatim, with no separate location field.** Three of
+the five carry their own area ("| Cleveland", "| CHA"), so a `where` column
+would have been redundant for them and invented for the other two. `SEATS` went
+from (handle, area) tuples to a plain list, and the open-seat rendering came out
+with it.
+
+**The QR code is generated, not drawn, and it is verified before it ships.**
+`tools/make-qr.py` reads `committee.PAYPAL_URL`, encodes at error-correction H
+(it gets printed and photographed in daylight at hamfests) and then decodes its
+own output back with OpenCV at both 564px and 180px, asserting it matches. A
+wrong QR code is the worst bug on this site: it looks right, it scans, and it
+sends money somewhere else. Nobody can spot it by eye, so the build checks it.
+Re-run that script if the pool URL ever changes.
+
+`committee.PAYPAL_URL` drives the link on both pages and the QR's contents from
+one place. Set it back to None and both pages return to saying the pool is not
+open rather than publishing a dead link.
+
+Meetings: Discord monthly, 3rd Wednesday 7:00 PM, with the standing agenda
+(Battlefield Marathon, Catoosa County EMA, infrastructure and deadzones) on the
+card. In person stays quarterly, still TBD. The Discord card is listed first
+now, since it is the one with a date on it.
+
 ### Open
 
 Nothing outstanding on content. The remaining items are in README.md: the

@@ -26,8 +26,16 @@ DISCORD = "https://discord.gg/XF354A3e9m"
 # abandoned.
 
 UPCOMING = [
+    dict(kind="On Discord", cadence="Monthly",
+         when="3rd Wednesday, 7:00 PM"),
     dict(kind="In person", cadence="Quarterly", when="TBD"),
-    dict(kind="On Discord", cadence="Monthly", when="TBD"),
+]
+
+# Standing agenda for the Discord meeting.
+AGENDA = [
+    "Battlefield Marathon Races",
+    "Catoosa County EMA",
+    "Infrastructure check-in and deadzone discussion",
 ]
 
 # ------------------------------------------------------------- last meeting
@@ -512,6 +520,7 @@ def upcoming_html(rows):
     return "\n".join(out)
 
 
+agenda_html = "\n".join(f"          <li>{a}</li>" for a in AGENDA)
 seats = committee.seats_html()
 archive_html = "\n".join(ARCHIVED)
 arch_count = f"{len(ARCHIVED)} past event{'' if len(ARCHIVED) == 1 else 's'}"
@@ -631,38 +640,36 @@ MAIN = f"""<main>
     </div>
     <div class="meet">
       <div class="meet-bar">
-        <span class="meet-pin">Draft &mdash; feedback wanted</span>
-        <h2>Funding &amp; Resource Committee</h2>
+        <span class="meet-pin">Now official</span>
+        <h2>Mesh Fund Committee</h2>
       </div>
       <div class="meet-body fundcom">
-        <p class="draft-note">A first draft, put up for feedback.
-          Nothing here is final.</p>
+        <p class="draft-note">The committee is seated and the pool is open.
+          This is no longer a draft.</p>
 
-        <p class="fc-head">PayPal pool</p>
-        <p>We have opted for a <strong>PayPal Pool</strong>. It will be created
-          and held by <strong>{committee.HOLDER}</strong>, and members of the
-          Resource Committee will have access to the account.</p>
+        <p class="fc-head">The pool is live</p>
+        <div class="pool">
+          <img src="{committee.PAYPAL_QR}" width="564" height="564"
+               alt="QR code linking to the ChattaMesh PayPal Pool."
+               loading="lazy" decoding="async">
+          <div class="pool-body">
+            <p>Donations go to the ChattaMesh PayPal Pool, held by
+              <strong>{committee.HOLDER}</strong>. Scan the code or use the
+              link &mdash; the stewards have access to the account.</p>
+            <a class="btn-pool" href="{committee.PAYPAL_URL}" target="_blank"
+               rel="noopener">Contribute to the pool</a>
+          </div>
+        </div>
 
-        <p class="fc-head">Resource committee</p>
-        <p>The committee exists to vote, without bias, on how our donated and
-          shared resources get spent. The focus is <strong>repeater
-          parts</strong> &mdash; expanding and strengthening the mesh.</p>
-        <p>Current nominees:</p>
+        <p class="fc-head">Your Fund Stewards</p>
+        <p>The stewards vote, without bias, on how our donated and shared
+          resources get spent. The focus is <strong>repeater parts</strong>
+          &mdash; expanding and strengthening the mesh.</p>
         <ul class="fc-seats">
 {seats}
         </ul>
-        <p>Interested in joining? Nominate yourself in <code>#funding</code> on
-          {DISCORD_INLINE}. If you have a concern about a specific committee
-          member, raise it publicly in the same channel.</p>
-
-        <p class="fc-head">How to contribute</p>
-        <p>Nothing to contribute to yet &mdash; the pool opens once the
-          committee is seated. When it does, there will be:</p>
-        <ul>
-          <li>A direct link here on chattame.sh</li>
-          <li>A QR code at meetings and at presentations &mdash; clubs,
-            hamfests, and so on</li>
-        </ul>
+        <p>If you have a concern about a specific steward, raise it publicly
+          in <code>#funding</code> on {DISCORD_INLINE}.</p>
 
         <p class="fc-head">Transparency</p>
         <p>This site and the Discord will both keep a public log of the current
@@ -670,9 +677,9 @@ MAIN = f"""<main>
           <a href="funding.html">funding page</a> is where that log lives.</p>
 
         <div class="panel">
-          <p class="panel-head">Feedback wanted</p>
-          <p>Questions, concerns or ideas? Reply in <code>#funding</code>.
-            We would rather hear them now, while this is still a draft.</p>
+          <p class="panel-head">Questions</p>
+          <p>Anything to raise about the fund? <code>#funding</code> on the
+            Discord, or bring it to the monthly meeting.</p>
         </div>
       </div>
     </div>
@@ -680,15 +687,19 @@ MAIN = f"""<main>
     <div class="meet">
       <div class="meet-bar">
         <span class="meet-pin">Next meetings</span>
-        <h2>Dates to be announced</h2>
+        <h2>Monthly on Discord, 3rd Wednesday</h2>
       </div>
-      <div class="meet-body">
+      <div class="meet-body fundcom">
         <div class="next-grid">
 {upcoming_html(UPCOMING)}
         </div>
-        <p class="next-note">Cadence is settled even though the dates aren't:
-          in person quarterly, on Discord monthly. Dates go out on Discord
-          first.</p>
+        <p class="fc-head">On the agenda</p>
+        <ul>
+{agenda_html}
+        </ul>
+        <p class="next-note">The Discord meeting is the 3rd Wednesday of every
+          month at 7:00 PM. In-person meetings stay quarterly; those dates go
+          out on Discord first.</p>
       </div>
     </div>
 

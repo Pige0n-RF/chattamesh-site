@@ -1,52 +1,50 @@
-"""Funding & Resource Committee -- shared by two generators.
+"""Mesh Fund Committee -- shared by two generators.
 
 The announcement card (build_announcements.py) and the funding page
-(build_funding.py) publish the same names, the same account holder and the
-same seat list. Those will change as seats fill, so they live here once
-rather than in two files that would quietly drift apart -- which is exactly
-how the treasury figure ended up disagreeing with itself in Rev 2.3.
+(build_funding.py) publish the same stewards, the same account holder and the
+same pool link. Those change as the committee changes, so they live here once
+rather than in two files that would quietly drift apart -- which is how the
+treasury figure ended up disagreeing with itself in Rev 2.3.
 
 Edit the data below and re-run both generators.
 """
 
-# Shown as the status chip on the funding page and the pin on the card.
-STATUS = "First draft &mdash; open for feedback"
+# The committee was seated on 14 November 2026. Before that this read
+# "First draft -- open for feedback" and both pages framed it as a proposal.
+STATUS = "Committee seated"
 
 # Who creates and holds the PayPal Pool account.
 HOLDER = "@Zixxorb | Cleveland"
 
-# There is no PayPal link yet: the pool opens once the committee exists.
-# Set this to the pool URL and both pages pick it up.
-PAYPAL_URL = None
+# The live pool. Set to None and both pages go back to saying the pool is not
+# open yet, rather than publishing a dead link.
+PAYPAL_URL = "https://www.paypal.com/pool/9ujedceAb6?sr=wccr"
 
-# (handle, area) -- None marks a seat nobody has claimed.
+# Scanned from a phone at meetings and presentations. Regenerate with
+# tools/make-qr.py if PAYPAL_URL ever changes -- a stale QR code takes money
+# to the wrong place and nobody can tell by looking at it.
+PAYPAL_QR = "images/funding-qr.png"
+
+# The Fund Stewards, as they are named in Discord. Handles are published
+# exactly as written: several carry their own area ("| Cleveland", "| CHA"),
+# so there is no separate location field to get wrong.
 SEATS = [
-    ("@zixxorb2", "Cleveland"),
-    ("@hewhopuns", "Red Bank"),
-    ("@Pige0n | Redbank", "Red Bank / Hixson"),
-    (None, None),
-    (None, None),
+    "@Zixxorb | Cleveland",
+    "@HeWhoPuns",
+    "@Pige0n | Redbank",
+    "@MadMax911",
+    "@BCx | CHA",
 ]
-
-FILLED = sum(1 for who, _ in SEATS if who)
-OPEN = len(SEATS) - FILLED
 
 
 def seats_html(indent="          "):
-    """The nominee list. Both pages carry the .fc-seats CSS below."""
-    out = []
-    for who, where in SEATS:
-        if who:
-            out.append(f'{indent}<li><span class="who">{who}</span>'
-                       f'<span class="where">{where}</span></li>')
-        else:
-            out.append(f'{indent}<li class="open">'
-                       f'<span class="who">Open seat</span></li>')
-    return "\n".join(out)
+    """The steward list. Both pages carry the .fc-seats CSS below."""
+    return "\n".join(f'{indent}<li><span class="who">{who}</span></li>'
+                     for who in SEATS)
 
 
 # Both pages set a `p` rule on the block that holds this markup, and
-# `.fundcom p` / `.ledger-row p` are (0,1,1). A bare class is (0,1,0) and
+# `.fundcom p` / `.fc-block p` are (0,1,1). A bare class is (0,1,0) and
 # loses, so every paragraph class here is written qualified by its parent.
 # That trap has now cost this project three separate bugs.
 CSS = """
@@ -58,10 +56,21 @@ CSS = """
     border-radius:var(--radius); background:var(--panel-2);
   }
   .fc-seats .who{color:var(--text); font-weight:600; font-size:0.93rem;}
-  .fc-seats .where{
-    font-family:'JetBrains Mono', monospace; font-size:0.74rem;
-    color:var(--muted-2); margin-left:auto;
+
+  .pool{
+    display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    border:1px solid var(--signal); background:rgba(110,112,230,0.08);
+    border-radius:var(--radius); padding:18px 20px; margin:0 0 14px;
   }
-  .fc-seats li.open{border-style:dashed; background:none;}
-  .fc-seats li.open .who{color:var(--muted-2); font-weight:400; font-style:italic;}
+  .pool img{
+    width:132px; height:132px; flex:none; border-radius:6px;
+    background:#fff; padding:6px;
+  }
+  .pool-body{flex:1 1 220px; min-width:0;}
+  .pool .btn-pool{
+    display:inline-block; margin-top:4px; padding:10px 18px;
+    background:var(--signal); color:#fff; font-weight:600; font-size:0.95rem;
+    border-radius:var(--radius); text-decoration:none; word-break:break-word;
+  }
+  .pool .btn-pool:hover{background:#6c75f5; text-decoration:none;}
 """
